@@ -1410,4 +1410,14 @@ main {
   background: #4d2d1a;
 }
 
+.banner {
+  width: 100%;
+  background: #f8f4ee;
+}
+
+.banner-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
