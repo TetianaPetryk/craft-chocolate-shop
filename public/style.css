@@ -1437,12 +1437,10 @@ body {
 
 /* телефон */
 @media (max-width: 768px) {
-
   .banner {
     width: 100%;
-    height: 320px;
-    min-height: 320px;
-    overflow: hidden;
+    height: 100vh;
+    min-height: 100vh;
   }
 
   .banner-img {
@@ -1450,7 +1448,5 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    display: block;
   }
-
 }
