@@ -3,12 +3,7 @@ body {
   margin: 0;
 }
 
-.banner {
-  background: #6b4226;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
+
 
 .logo {
   height: 60px;
@@ -21,17 +16,6 @@ body {
   border: none;
   padding: 10px;
   cursor: pointer;
-}
-
-
-
-.banner-img {
-  width: 100%;
-  height: 88vh; 
-  object-fit: cover;
-  display: block;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -1410,14 +1394,37 @@ main {
   background: #4d2d1a;
 }
 
+
+/* ===== БАНЕР ===== */
+
 .banner {
   width: 100%;
-  background: #f8f4ee;
+  background: #f8f3e7;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
 }
 
 .banner-img {
   width: 100%;
   height: auto;
   display: block;
+  object-fit: contain;
 }
 
+/* ===== МОБІЛЬНА ВЕРСІЯ ===== */
+
+@media (max-width: 768px) {
+
+  .banner {
+    width: 100%;
+  }
+
+  .banner-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+  }
+
+}
