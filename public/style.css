@@ -206,6 +206,8 @@ main {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
   margin: 0 0 20px 0;
+  text-align: center;
+width: 100%;
 }
 
 .back-btn {
