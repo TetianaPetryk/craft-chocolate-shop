@@ -1,12 +1,14 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-  background: #7b4b2a;
-  overflow-x: hidden;
 }
 
-
+.banner {
+  background: #6b4226;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
 
 .logo {
   height: 60px;
@@ -19,6 +21,17 @@ body {
   border: none;
   padding: 10px;
   cursor: pointer;
+}
+
+
+
+.banner-img {
+  width: 100%;
+  height: 88vh; 
+  object-fit: cover;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 
@@ -1396,22 +1409,44 @@ main {
 #pay-btn:hover {
   background: #4d2d1a;
 }
+/* БАНЕР */
 
-
-/* ===== БАНЕР ===== */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden;
+}
 
 .banner {
   width: 100%;
-  background: #f8f3e7;
-  padding: 0;
-  margin: 0;
+  height: 100vh;
+  min-height: 100vh;
   overflow: hidden;
-  border-radius: 18px;
+  position: relative;
 }
 
 .banner-img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
+/* телефон */
+@media (max-width: 768px) {
+  .banner {
+    width: 100%;
+    height: 100vh;
+    min-height: 100vh;
+  }
+
+  .banner-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
