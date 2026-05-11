@@ -1411,26 +1411,22 @@ main {
 }
 /* АДАПТИВ БАНЕРА ДЛЯ ТЕЛЕФОНІВ  */
 
-.banner {
-  width: 100%;
-  overflow: hidden;
-}
-
-.banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-  object-fit: contain;
-}
 
 @media (max-width: 768px) {
+
   .banner {
-    height: auto;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
   }
 
+  .banner img,
   .banner-img {
     width: 100%;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
   }
+
 }
