@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Вхід адміністратора</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="login-container">
+  <h2>Вхід в адмін-панель</h2>
+
+  <input type="text" id="login" placeholder="Логін">
+  <input type="password" id="password" placeholder="Пароль">
+
+  <button id="login-btn">Увійти</button>
+</div>
+
+<script>
+  const btn = document.getElementById('login-btn');
+
+  btn.addEventListener('click', () => {
+    const login = document.getElementById('login').value;
+    const password = document.getElementById('password').value;
+
+    if (login === 'admin' && password === '1234') {
+      window.location.href = 'admin.html';
+    } else {
+      alert('Невірний логін або пароль');
+    }
+  });
+</script>
+
+</body>
+</html>

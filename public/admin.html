@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Адмін-панель</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="admin-page">
+
+<h1 class="admin-title">Адмін-панель</h1>
+
+<div class="admin-menu">
+  <button id="show-orders">Замовлення</button>
+  <button id="show-products">Товари</button>
+  <a href="index.html">На головну</a>
+</div>
+
+<section id="orders-section">
+  <div id="orders-container" class="admin-orders"></div>
+</section>
+
+<section id="products-section" class="hidden">
+  <h2 class="admin-section-title">Товари</h2>
+
+  <div class="admin-add-product">
+    <h3>Додати новий товар</h3>
+
+    <input type="text" id="new-name" placeholder="Назва товару">
+    <textarea id="new-description" placeholder="Опис товару"></textarea>
+    <input type="number" id="new-price" placeholder="Ціна">
+    <input type="text" id="new-weight" placeholder="Вага, наприклад 90 г">
+    <input type="text" id="new-image" placeholder="Назва фото, наприклад black1.png">
+
+    <select id="new-category">
+      <option value="black">Чорний шоколад</option>
+      <option value="milk">Молочний шоколад</option>
+      <option value="special">Цікаві новинки</option>
+    </select>
+
+    <button id="add-product-btn">Додати товар</button>
+  </div>
+
+  <div id="products-container" class="admin-products"></div>
+</section>
+
+<script>
+  const ordersSection = document.getElementById('orders-section');
+  const productsSection = document.getElementById('products-section');
+
+  document.getElementById('show-orders').addEventListener('click', () => {
+    ordersSection.classList.remove('hidden');
+    productsSection.classList.add('hidden');
+    loadOrders();
+  });
+
+  document.getElementById('show-products').addEventListener('click', () => {
+    productsSection.classList.remove('hidden');
+    ordersSection.classList.add('hidden');
+    loadProducts();
+  });
+
+  async function loadOrders() {
+    const res = await fetch('/api/orders');
+    const orders = await res.json();
+
+    const container = document.getElementById('orders-container');
+    container.innerHTML = '';
+
+    if (orders.length === 0) {
+      container.innerHTML = '<p class="empty-cart">Немає замовлень</p>';
+      return;
+    }
+
+    orders.forEach(order => {
+      container.innerHTML += `
+        <div class="admin-card">
+          <h3>Замовлення #${order.id}</h3>
+
+          <p><b>Клієнт:</b> ${order.customerName}</p>
+          <p><b>Телефон:</b> ${order.phone}</p>
+          <p><b>Місто:</b> ${order.city}</p>
+          <p><b>Відділення:</b> ${order.novaPoshta}</p>
+          <p><b>Оплата:</b> ${getPaymentText(order.payment)}</p>
+          <p><b>Статус оплати:</b> ${order.paymentStatus || 'Не вказано'}</p>
+          <p><b>Сума:</b> ${order.total} грн</p>
+
+          <p><b>Номер накладної:</b></p>
+          <input 
+            type="text"
+            class="ttn-input"
+            placeholder="Введіть номер накладної"
+            value="${order.ttn || ''}"
+            data-id="${order.id}"
+            ${(order.status === 'Виконано' && order.ttn) ? 'disabled' : ''}
+          >
+
+          <p>
+            <b>Статус:</b>
+            <span class="status-badge ${getStatusClass(order.status)}" data-id="${order.id}">
+              ${order.status}
+            </span>
+          </p>
+        </div>
+      `;
+    });
+  }
+
+  function getStatusClass(status) {
+    if (status === 'Нове') return 'status-new';
+    if (status === 'В обробці') return 'status-processing';
+    if (status === 'Виконано') return 'status-done';
+    return '';
+  }
+
+  function getPaymentText(payment) {
+    if (payment === 'card') return 'Оплата карткою';
+    if (payment === 'cod') return 'Оплата при отриманні';
+    return payment;
+  }
+
+  document.addEventListener('blur', async (e) => {
+    if (!e.target.classList.contains('ttn-input')) return;
+
+    const orderId = e.target.dataset.id;
+    const ttn = e.target.value.trim();
+
+    if (!ttn) return;
+
+    await fetch(`/api/orders/${orderId}/ttn`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ttn })
+    });
+  }, true);
+
+  document.addEventListener('click', async (e) => {
+    if (!e.target.classList.contains('status-badge')) return;
+
+    const orderId = e.target.dataset.id;
+    const currentStatus = e.target.textContent.trim();
+
+    const card = e.target.closest('.admin-card');
+    const ttnInput = card.querySelector('.ttn-input');
+    const ttn = ttnInput.value.trim();
+
+    let newStatus;
+
+    if (currentStatus === 'Нове') {
+      newStatus = 'В обробці';
+    } else if (currentStatus === 'В обробці') {
+      if (!ttn) {
+        alert('Спочатку введіть номер накладної');
+        return;
+      }
+
+      await fetch(`/api/orders/${orderId}/ttn`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ttn })
+      });
+
+      newStatus = 'Виконано';
+    } else {
+      newStatus = 'Нове';
+    }
+
+    await fetch(`/api/orders/${orderId}/status`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: newStatus })
+    });
+
+    loadOrders();
+  });
+
+  async function loadProducts() {
+    const res = await fetch('/api/products');
+    const products = await res.json();
+
+    const container = document.getElementById('products-container');
+    container.innerHTML = '';
+
+    if (products.length === 0) {
+      container.innerHTML = '<p class="empty-cart">Товарів поки немає</p>';
+      return;
+    }
+
+    products.forEach(product => {
+      container.innerHTML += `
+        <div class="product-card admin-product-card" data-id="${product.id}">
+          <img src="${product.image}" alt="${product.name}">
+
+          <div class="card-content">
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-description">${product.description}</p>
+
+            <div class="price-block">
+              <span class="price">${product.price} грн</span>
+              <span class="weight">за ${product.weight || '90 г'}</span>
+            </div>
+
+            <p class="admin-category">
+              Категорія: ${getCategoryText(product.category)}
+            </p>
+          </div>
+
+          <div class="admin-product-actions">
+            <button class="edit-product">Редагувати</button>
+            <button class="delete-product">Видалити</button>
+          </div>
+        </div>
+      `;
+    });
+  }
+
+  function getCategoryText(category) {
+    if (category === 'black') return 'Чорний шоколад';
+    if (category === 'milk') return 'Молочний шоколад';
+    if (category === 'special') return 'Цікаві новинки';
+    return category;
+  }
+
+  document.getElementById('add-product-btn').addEventListener('click', async () => {
+    const name = document.getElementById('new-name').value.trim();
+    const description = document.getElementById('new-description').value.trim();
+    const price = document.getElementById('new-price').value.trim();
+    const weight = document.getElementById('new-weight').value.trim();
+    const image = document.getElementById('new-image').value.trim();
+    const category = document.getElementById('new-category').value;
+
+    if (!name || !description || !price || !weight || !image) {
+      alert('Заповніть усі поля товару');
+      return;
+    }
+
+    const product = {
+      name,
+      description,
+      price: Number(price),
+      weight,
+      image,
+      category,
+      available: true
+    };
+
+    const res = await fetch('/api/products', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(product)
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      alert('Товар додано');
+
+      document.getElementById('new-name').value = '';
+      document.getElementById('new-description').value = '';
+      document.getElementById('new-price').value = '';
+      document.getElementById('new-weight').value = '';
+      document.getElementById('new-image').value = '';
+
+      loadProducts();
+    }
+  });
+
+  document.addEventListener('click', async (e) => {
+    if (e.target.classList.contains('delete-product')) {
+      const card = e.target.closest('.admin-product-card');
+      const id = card.dataset.id;
+
+      const confirmDelete = confirm('Видалити цей товар?');
+      if (!confirmDelete) return;
+
+      await fetch(`/api/products/${id}`, {
+        method: 'DELETE'
+      });
+
+      loadProducts();
+    }
+
+    if (e.target.classList.contains('edit-product')) {
+      const card = e.target.closest('.admin-product-card');
+      const id = card.dataset.id;
+
+      const title = card.querySelector('.product-title').textContent;
+      const description = card.querySelector('.product-description').textContent;
+      const price = card.querySelector('.price').textContent.replace(' грн', '');
+      const weight = card.querySelector('.weight').textContent.replace('за ', '');
+      const image = card.querySelector('img').getAttribute('src');
+
+      card.innerHTML = `
+        <input class="edit-name" value="${title}">
+        <textarea class="edit-description">${description}</textarea>
+        <input class="edit-price" type="number" value="${price}">
+        <input class="edit-weight" value="${weight}">
+        <input class="edit-image" value="${image}">
+
+        <select class="edit-category">
+          <option value="black">Чорний шоколад</option>
+          <option value="milk">Молочний шоколад</option>
+          <option value="special">Цікаві новинки</option>
+        </select>
+
+        <div class="admin-product-actions">
+          <button class="save-product" data-id="${id}">Зберегти</button>
+          <button class="cancel-edit">Скасувати</button>
+        </div>
+      `;
+    }
+
+    if (e.target.classList.contains('cancel-edit')) {
+      loadProducts();
+    }
+
+    if (e.target.classList.contains('save-product')) {
+      const card = e.target.closest('.admin-product-card');
+      const id = e.target.dataset.id;
+
+      const updatedProduct = {
+        name: card.querySelector('.edit-name').value.trim(),
+        description: card.querySelector('.edit-description').value.trim(),
+        price: Number(card.querySelector('.edit-price').value),
+        weight: card.querySelector('.edit-weight').value.trim(),
+        image: card.querySelector('.edit-image').value.trim(),
+        category: card.querySelector('.edit-category').value
+      };
+
+      await fetch(`/api/products/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedProduct)
+      });
+
+      alert('Товар оновлено');
+      loadProducts();
+    }
+  });
+
+  loadOrders();
+</script>
+
+</body>
+</html>

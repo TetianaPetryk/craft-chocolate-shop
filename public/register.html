@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Реєстрація клієнта</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+<div class="auth-card">
+  <h2>Створити акаунт</h2>
+  <p>Зареєструйтесь, щоб переглядати свої замовлення</p>
+
+  <input type="text" id="name" placeholder="ПІБ">
+  <input type="tel" id="phone" placeholder="Номер телефону">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Пароль">
+
+  <button id="register-btn">Зареєструватися</button>
+
+  <p class="auth-link">
+    Вже маєте акаунт? <a href="login.html">Увійти</a>
+  </p>
+
+  <a href="index.html" class="back-auth">← На головну</a>
+</div>
+
+<script>
+  document.getElementById('register-btn').addEventListener('click', async () => {
+    const name = document.getElementById('name').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!name || !phone || !email || !password) {
+      alert('Заповніть усі поля');
+      return;
+    }
+
+    const res = await fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email, password })
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      alert('Реєстрація успішна');
+      window.location.href = 'login.html';
+    } else {
+      alert(result.message || 'Помилка реєстрації');
+    }
+  });
+</script>
+
+</body>
+</html>

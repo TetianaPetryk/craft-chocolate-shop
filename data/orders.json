@@ -1,0 +1,149 @@
+[
+  {
+    "id": 1777804481121,
+    "customerName": "Таня Петрик",
+    "phone": "0669028295",
+    "city": "полтава",
+    "novaPoshta": "2",
+    "payment": "cod",
+    "items": [
+      {
+        "name": "Чорний шоколад 56%",
+        "price": 120,
+        "quantity": 1
+      },
+      {
+        "name": "Чорний шоколад 70%",
+        "price": 145,
+        "quantity": 1
+      },
+      {
+        "name": "Чорний шоколад 90%",
+        "price": 135,
+        "quantity": 1
+      },
+      {
+        "name": "Шоколад із їстівними квітами",
+        "price": 165,
+        "quantity": 1
+      },
+      {
+        "name": "Шоколад із сублімованою малиною",
+        "price": 158,
+        "quantity": 1
+      },
+      {
+        "name": "Шоколад із морською сіллю",
+        "price": 145,
+        "quantity": 2
+      },
+      {
+        "name": "Шоколад із лавандою",
+        "price": 170,
+        "quantity": 1
+      }
+    ],
+    "total": 1183,
+    "createdAt": "03.05.2026, 13:34:41",
+    "status": "Виконано",
+    "ttn": "20451456952345"
+  },
+  {
+    "id": 1777805008829,
+    "customerName": "TETIANA PETRYK",
+    "phone": "5656892985",
+    "city": "полтава",
+    "novaPoshta": "5",
+    "payment": "card",
+    "items": [
+      {
+        "name": "Молочний шоколад “Класик”",
+        "price": 110,
+        "quantity": 1
+      },
+      {
+        "name": "Молочний шоколад Домінікана",
+        "price": 130,
+        "quantity": 1
+      }
+    ],
+    "total": 240,
+    "createdAt": "03.05.2026, 13:43:28",
+    "status": "Виконано",
+    "ttn": "2051325963214"
+  },
+  {
+    "id": 1777807957266,
+    "customerName": "Таня Петрик",
+    "phone": "0669028295",
+    "city": "Смт. Варва",
+    "novaPoshta": "5",
+    "payment": "card",
+    "items": [
+      {
+        "name": "Шоколад із сублімованою полуницею",
+        "price": 155,
+        "quantity": 1
+      },
+      {
+        "name": "Шоколад із їстівними квітами",
+        "price": 165,
+        "quantity": 1
+      }
+    ],
+    "total": 320,
+    "status": "Виконано",
+    "createdAt": "03.05.2026, 14:32:37",
+    "ttn": "20451423695412"
+  },
+  {
+    "id": 1778141820917,
+    "customerName": "TETIANA PETRYK",
+    "phone": "0669028295",
+    "city": "полтава",
+    "novaPoshta": "2",
+    "payment": "card",
+    "items": [
+      {
+        "name": "Чорний шоколад 56%",
+        "price": 120,
+        "quantity": 2
+      },
+      {
+        "name": "Чорний шоколад 70%",
+        "price": 200,
+        "quantity": 3
+      }
+    ],
+    "total": 840,
+    "paymentStatus": "Оплачено",
+    "status": "Нове",
+    "createdAt": "07.05.2026, 11:17:00"
+  },
+  {
+    "id": 1778141890391,
+    "customerName": "TETIANA PETRYK",
+    "phone": "0669028295",
+    "city": "полтава",
+    "novaPoshta": "2",
+    "payment": "card",
+    "items": [
+      {
+        "name": "Молочний шоколад класичний",
+        "price": 110,
+        "weight": "90 г",
+        "quantity": 1
+      },
+      {
+        "name": "Молочний шоколад Домінікана",
+        "price": 130,
+        "weight": "90 г",
+        "quantity": 1
+      }
+    ],
+    "total": 240,
+    "paymentStatus": "Оплачено",
+    "status": "Нове",
+    "createdAt": "07.05.2026, 11:18:10"
+  }
+]

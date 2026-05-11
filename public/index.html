@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Craft Chocolate Shop</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+ 
+  <header class="banner">
+  <img src="banner2.png" alt="Банер Craft Chocolate Shop" class="banner-img">
+  <h1>Craft Chocolate Shop</h1>
+    </header>
+
+<nav id="sidebar">
+  <button class="icon-btn" id="cart-btn">
+    <i class="fa-solid fa-cart-shopping"></i>
+  </button>
+
+   <!-- ІКОНКА КОРИСТУВАЧА -->
+  <button class="icon-btn" id="user-btn">
+    <i class="fa-solid fa-user"></i>
+  </button>
+  <ul id="auth-menu" class="hidden">
+<li><a href="login.html">Увійти як клієнт</a></li>
+<li><a href="admin-login.html">Увійти як адмін</a></li>
+</ul>
+  <!-- Кнопка меню -->
+  <button id="menu-toggle">☰</button>
+
+  <!-- Список меню (спочатку прихований) -->
+  <ul id="menu-list" class="hidden">
+    <li><a href="/black.html">Чорний шоколад</a></li>
+    <li><a href="/milk.html">Молочний шоколад</a></li>
+    <li><a href="/special.html">Цікаві новинки</a></li>
+  </ul>
+</nav>
+ 
+
+ <main>
+  <h2>ПРО НАС</h2>
+  <p>
+    Ми створюємо шоколад, що виходить за межі звичного уявлення про десерт. Це не просто смак — це досвід, витончений і багатогранний, як добре вино чи мистецтво.
+  </p>
+  <p>
+Наш інтернет-магазин крафтового шоколаду народився з прагнення поєднати традиції та сучасну естетику. Ми працюємо лише з відбірними какао-бобами та натуральними інгредієнтами найвищої якості, приділяючи увагу кожному етапу — від походження сировини до фінального оформлення.
+  </p>
+Кожна колекція — це продумана композиція смаків, де класика зустрічається з авторськими інтерпретаціями. Тонкі нотки фруктів, горіхів, спецій розкриваються поступово, залишаючи довгий, елегантний післясмак.
+<p>
+Ми віримо в силу стриманої розкоші. Саме тому наш підхід — це мінімалізм у формі та глибина в змісті. Жодних зайвих деталей — лише досконалість смаку, текстури та візуальної подачі.
+</p>
+Наш шоколад — для тих, хто обирає якість, відчуває нюанси та цінує справжнє.
+  </p>
+  <p>
+    Ми віримо, що шоколад — це не просто солодощі, а мистецтво, яке дарує емоції. 
+    Кожен наш продукт створений із турботою, щоб ви могли відчути справжній смак щастя.
+  </p>
+</main>
+<script>
+  const toggleBtn = document.getElementById('menu-toggle');
+  const menuList = document.getElementById('menu-list');
+
+  const userBtn = document.getElementById('user-btn');
+  const authMenu = document.getElementById('auth-menu');
+
+  
+
+  //  меню
+  toggleBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+
+    menuList.classList.toggle('hidden');
+    authMenu.classList.add('hidden');
+  });
+
+  //  вхід
+  userBtn.addEventListener('click', (event) => {
+    event.stopPropagation();
+
+    authMenu.classList.toggle('hidden');
+    menuList.classList.add('hidden');
+  });
+
+  
+  // клік всередині меню не закриває його
+  menuList.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+
+  authMenu.addEventListener('click', (event) => {
+    event.stopPropagation();
+  });
+
+  // клік будь-де поза меню
+  document.addEventListener('click', () => {
+    menuList.classList.add('hidden');
+    authMenu.classList.add('hidden');
+  });
+
+  // прокрутка закриває меню
+  window.addEventListener('scroll', () => {
+    menuList.classList.add('hidden');
+    authMenu.classList.add('hidden');
+  });
+  cartBtn.addEventListener('click', (event) => {
+  event.stopPropagation();
+
+  const cartPanel = document.getElementById('cart-panel');
+
+  if (cartPanel) {
+    cartPanel.classList.remove('hidden');
+  }
+});
+
+</script>
+<footer>
+  <div class="footer-container">
+    <div class="footer-info">
+      <h3>Контакти</h3>
+      <p>Телефон: +38 (066) 902-82-95</p>
+      <p>Графік роботи: Пн–Пт з 9:00 до 18:00</p>
+      <p>📍 Місто: Полтава</p>
+      <p>🚚 Доставка: Нова Пошта</p>
+      <p><strong>Замовляйте продукцію прямо на нашому сайті!</strong></p>
+    </div>
+    <div class="footer-map">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2563.123456789!2d34.552!3d49.588!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40d82f123456789%3A0xabcdef123456789!2z0J_QvtC70YzQutCw0Y8g0KHQv9C10YHQutC40Lkg0KHQvtC30LXRgNC90L7QstCw!5e0!3m2!1suk!2sua!4v1680000000000!5m2!1suk!2sua" 
+        width="300" 
+        height="200" 
+        style="border:0; border-radius:8px;" 
+        allowfullscreen="" 
+        loading="lazy">
+      </iframe>
+    </div>
+  </div>
+</footer>
+<div id="quantity-modal" class="modal hidden">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close">×</button>
+
+    <h2 id="modal-title">Назва товару</h2>
+    <p id="modal-price">120 грн / 90 г</p>
+
+    <div class="quantity-box">
+      <button id="minus-btn">−</button>
+      <span id="quantity">1</span>
+      <button id="plus-btn">+</button>
+    </div>
+
+    <p class="modal-total">
+      Разом: <span id="total-price">120 грн</span>
+    </p>
+
+    <button id="confirm-add">Додати в кошик</button>
+  </div>
+
+</div>
+<div id="cart-panel" class="cart-panel hidden">
+  <div class="cart-content">
+    <button class="modal-close" id="cart-close">×</button>
+    <h2>Ваш кошик</h2>
+
+    <div id="cart-items"></div>
+
+    <p class="cart-total">
+      Загальна сума: <span id="cart-total">0 грн</span>
+    </p>
+
+    <div class="cart-actions">
+      <button id="clear-cart">Очистити кошик</button>
+      <button id="checkout-btn">Оформити замовлення</button>
+    </div>
+
+    
+    <div id="checkout-form" class="checkout-form hidden">
+      <h3>Оформлення замовлення</h3>
+
+      <input type="text" id="customer-name" placeholder="ПІБ отримувача">
+      <input type="tel" id="customer-phone" placeholder="Номер телефону">
+      <input type="text" id="customer-city" placeholder="Місто">
+      <input type="text" id="nova-poshta" placeholder="Відділення Нової пошти">
+
+     <div class="custom-select" id="payment-select">
+  <div class="select-selected">Оберіть спосіб оплати</div>
+
+  <div class="select-items hidden">
+    <div data-value="card">Оплата карткою</div>
+    <div data-value="cod">Оплата при отриманні</div>
+  </div>
+</div>
+
+<input type="hidden" id="payment-method">
+
+      <button id="submit-order">Підтвердити замовлення</button>
+    </div>
+
+  </div>
+</div>
+<div id="payment-modal" class="payment-modal hidden">
+  <div class="payment-box">
+    <button class="modal-close" id="payment-close">×</button>
+
+    <h2>Тестова онлайн-оплата</h2>
+    <p>Це навчальний режим. Гроші не списуються.</p>
+
+    <input type="text" id="card-number" placeholder="Номер картки 0000 0000 0000 0000">
+    <input type="text" id="card-date" placeholder="MM/YY">
+    <input type="password" id="card-cvv" placeholder="CVV">
+
+    <button id="pay-btn">Оплатити</button>
+  </div>
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>

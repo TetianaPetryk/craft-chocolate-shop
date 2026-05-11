@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Молочний шоколад</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body data-category="milk">
+
+<header class="page-header">
+  <h1>Молочний шоколад</h1>
+  <a href="index.html" class="back-btn">← На головну</a>
+</header>
+
+<main class="products-page">
+  <div id="products-grid" class="products-grid"></div>
+</main>
+
+<div id="quantity-modal" class="modal hidden">
+  <div class="modal-content">
+    <button class="modal-close" id="modal-close">×</button>
+
+    <h2 id="modal-title">Назва товару</h2>
+    <p id="modal-price">120 грн / 90 г</p>
+
+    <div class="quantity-box">
+      <button id="minus-btn">−</button>
+      <span id="quantity">1</span>
+      <button id="plus-btn">+</button>
+    </div>
+
+    <p class="modal-total">
+      Разом: <span id="total-price">120 грн</span>
+    </p>
+
+    <button id="confirm-add">Додати в кошик</button>
+  </div>
+</div>
+
+<div id="cart-panel" class="cart-panel hidden">
+  <div class="cart-content">
+    <button class="modal-close" id="cart-close">×</button>
+    <h2>Ваш кошик</h2>
+
+    <div id="cart-items"></div>
+
+    <p class="cart-total">
+      Загальна сума: <span id="cart-total">0 грн</span>
+    </p>
+
+    <div class="cart-actions">
+      <button id="clear-cart">Очистити кошик</button>
+      <button id="checkout-btn">Оформити замовлення</button>
+    </div>
+
+    <div id="checkout-form" class="checkout-form hidden">
+      <h3>Оформлення замовлення</h3>
+
+      <input type="text" id="customer-name" placeholder="ПІБ отримувача">
+      <input type="tel" id="customer-phone" placeholder="Номер телефону">
+      <input type="text" id="customer-city" placeholder="Місто">
+      <input type="text" id="nova-poshta" placeholder="Відділення Нової пошти">
+
+      <div class="custom-select" id="payment-select">
+        <div class="select-selected">Оберіть спосіб оплати</div>
+
+        <div class="select-items hidden">
+          <div data-value="card">Оплата карткою</div>
+          <div data-value="cod">Оплата при отриманні</div>
+        </div>
+      </div>
+
+      <input type="hidden" id="payment-method">
+
+      <button id="submit-order">Підтвердити замовлення</button>
+    </div>
+  </div>
+</div>
+<div id="payment-modal" class="payment-modal hidden">
+  <div class="payment-box">
+    <button class="modal-close" id="payment-close">×</button>
+
+    <h2>Тестова онлайн-оплата</h2>
+    <p>Це навчальний режим. Гроші не списуються.</p>
+
+    <input type="text" id="card-number" placeholder="Номер картки 0000 0000 0000 0000">
+    <input type="text" id="card-date" placeholder="MM/YY">
+    <input type="password" id="card-cvv" placeholder="CVV">
+
+    <button id="pay-btn">Оплатити</button>
+  </div>
+</div>
+<script src="catalog.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>

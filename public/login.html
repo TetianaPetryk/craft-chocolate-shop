@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Вхід клієнта</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+<div class="auth-card">
+  <h2>Вхід у кабінет</h2>
+  <p>Увійдіть, щоб переглянути історію замовлень</p>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Пароль">
+
+  <button id="login-btn">Увійти</button>
+
+  <p class="auth-link">
+    Немає акаунта? <a href="register.html">Зареєструватися</a>
+  </p>
+
+  <a href="index.html" class="back-auth">← На головну</a>
+</div>
+
+<script>
+  document.getElementById('login-btn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    if (!email || !password) {
+      alert('Заповніть усі поля');
+      return;
+    }
+
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+
+    const result = await res.json();
+
+    if (result.success) {
+      localStorage.setItem('currentUser', JSON.stringify(result.user));
+      window.location.href = 'profile.html';
+    } else {
+      alert(result.message || 'Невірний email або пароль');
+    }
+  });
+</script>
+
+</body>
+</html>

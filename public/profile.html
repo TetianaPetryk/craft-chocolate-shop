@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Кабінет клієнта</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="profile-page">
+
+<header class="profile-header">
+  <h1>Особистий кабінет</h1>
+  <div>
+    <a href="index.html">На головну</a>
+    <button id="logout-btn">Вийти</button>
+  </div>
+</header>
+
+<main class="profile-container">
+  <section class="profile-info">
+    <h2>Мої дані</h2>
+    <div class="client-status">
+  <span id="client-rank">Chocolate Lover</span>
+</div>
+    <p><b>ПІБ:</b> <span id="user-name"></span></p>
+    <p><b>Телефон:</b> <span id="user-phone"></span></p>
+    <p><b>Email:</b> <span id="user-email"></span></p>
+  </section>
+
+  <section class="profile-orders">
+    <h2>Мої замовлення</h2>
+    <div id="user-orders"></div>
+  </section>
+</main>
+
+<script>
+  const user = JSON.parse(localStorage.getItem('currentUser'));
+
+  if (!user) {
+    window.location.href = 'login.html';
+  }
+
+  document.getElementById('user-name').textContent = user.name;
+  document.getElementById('user-phone').textContent = user.phone;
+  document.getElementById('user-email').textContent = user.email;
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    localStorage.removeItem('currentUser');
+    window.location.href = 'login.html';
+  });
+function updateClientStatus(orders) {
+  const totalSpent = orders.reduce((sum, order) => {
+    return sum + Number(order.total || 0);
+  }, 0);
+
+  const rankElement = document.getElementById('client-rank');
+
+  if (totalSpent >= 3000) {
+    rankElement.textContent = '🍫 VIP Taster';
+    rankElement.className = 'rank-vip';
+  } else if (totalSpent >= 1000) {
+    rankElement.textContent = '🍫 Cocoa Expert';
+    rankElement.className = 'rank-expert';
+  } else {
+    rankElement.textContent = '🍫 Chocolate Lover';
+    rankElement.className = 'rank-lover';
+  }
+}
+  async function loadUserOrders() {
+    const res = await fetch('/api/orders');
+    const orders = await res.json();
+
+    const userOrders = orders.filter(order => {
+      return order.phone === user.phone || order.customerName === user.name;
+    });
+updateClientStatus(userOrders);
+    const container = document.getElementById('user-orders');
+
+    if (userOrders.length === 0) {
+      container.innerHTML = '<p>У вас поки немає замовлень.</p>';
+      return;
+    }
+
+    container.innerHTML = userOrders.map(order => `
+      <div class="profile-order-card">
+        <h3>Замовлення #${order.id}</h3>
+        <p><b>Сума:</b> ${order.total} грн</p>
+        <p><b>Статус:</b> <span class="status-badge ${getStatusClass(order.status)}">${order.status}</span></p>
+        <p><b>ЕН:</b> ${order.ttn || 'Ще не додано'}</p>
+      </div>
+    `).join('');
+  }
+
+  function getStatusClass(status) {
+    if (status === 'Нове') return 'status-new';
+    if (status === 'В обробці') return 'status-processing';
+    if (status === 'Виконано') return 'status-done';
+    return '';
+  }
+
+  loadUserOrders();
+</script>
+
+</body>
+</html>

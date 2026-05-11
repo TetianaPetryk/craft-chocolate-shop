@@ -1,0 +1,152 @@
+[
+  {
+    "id": 1,
+    "name": "Чорний шоколад 56%",
+    "description": "М’який і збалансований смак із ніжною гірчинкою. Ідеальний вибір для тих, хто тільки відкриває темний шоколад.",
+    "price": 120,
+    "weight": "95 г",
+    "image": "black1.png",
+    "category": "black",
+    "available": true
+  },
+  {
+    "id": 2,
+    "name": "Чорний шоколад 70%",
+    "description": "Класичний насичений смак какао з глибокими ароматами та приємною терпкістю.",
+    "price": 200,
+    "weight": "95 г",
+    "image": "black2.png",
+    "category": "black",
+    "available": true
+  },
+  {
+    "id": 3,
+    "name": "Чорний шоколад 90%",
+    "description": "Інтенсивний, глибокий і виразний смак для справжніх поціновувачів.",
+    "price": 135,
+    "weight": "90 г",
+    "image": "black3.png",
+    "category": "black",
+    "available": true
+  },
+  {
+    "id": 4,
+    "name": "Чорний шоколад з лісовим горіхом",
+    "description": "Насичений смак темного шоколаду у поєднанні з хрустким лісовим горіхом.",
+    "price": 135,
+    "weight": "90 г",
+    "image": "black4.png",
+    "category": "black",
+    "available": true
+  },
+  {
+    "id": 5,
+    "name": "Чорний шоколад з мигдалем",
+    "description": "Глибокий шоколадний смак із делікатною гірчинкою доповнений ніжним мигдалем.",
+    "price": 135,
+    "weight": "90 г",
+    "image": "black5.png",
+    "category": "black",
+    "available": true
+  },
+  {
+    "id": 6,
+    "name": "Молочний шоколад класичний",
+    "description": "Ніжний і збалансований смак із м’якою вершковою текстурою.",
+    "price": 110,
+    "weight": "90 г",
+    "image": "milk1.png",
+    "category": "milk",
+    "available": true
+  },
+  {
+    "id": 7,
+    "name": "Молочний шоколад Домінікана",
+    "description": "Насичений смак із карамельними нотами та оксамитовим післясмаком.",
+    "price": 130,
+    "weight": "90 г",
+    "image": "milk2.png",
+    "category": "milk",
+    "available": true
+  },
+  {
+    "id": 8,
+    "name": "Молочний шоколад “Еквадор”",
+    "description": "Витончений аромат із легкими квітковими та горіховими відтінками.",
+    "price": 135,
+    "weight": "90 г",
+    "image": "milk3.png",
+    "category": "milk",
+    "available": true
+  },
+  {
+    "id": 10,
+    "name": "Шоколад із сублімованою полуницею",
+    "description": "Яскраве поєднання шоколаду та кисло-солодкої полуниці.",
+    "price": 155,
+    "weight": "90 г",
+    "image": "special1.png",
+    "category": "special",
+    "available": true
+  },
+  {
+    "id": 11,
+    "name": "Шоколад із сублімованою малиною",
+    "description": "Соковитий ягідний смак із легкою кислинкою та насиченим шоколадом.",
+    "price": 155,
+    "weight": "90 г",
+    "image": "special2.png",
+    "category": "special",
+    "available": true
+  },
+  {
+    "id": 12,
+    "name": "Шоколад із їстівними квітами",
+    "description": "Витончений десерт із ніжним ароматом квітів і шоколаду.",
+    "price": 500,
+    "weight": "90 г",
+    "image": "special3.png",
+    "category": "special",
+    "available": true
+  },
+  {
+    "id": 13,
+    "name": "Шоколад із перцем",
+    "description": "Несподіване поєднання солодкого та пікантного смаку.",
+    "price": 150,
+    "weight": "90 г",
+    "image": "special4.png",
+    "category": "special",
+    "available": true
+  },
+  {
+    "id": 14,
+    "name": "Шоколад із морською сіллю",
+    "description": "Контраст солодкого шоколаду та легкої солоності.",
+    "price": 145,
+    "weight": "90 г",
+    "image": "special5.png",
+    "category": "special",
+    "available": true
+  },
+  {
+    "id": 15,
+    "name": "Шоколад із лавандою",
+    "description": "Ніжний аромат лаванди додає витонченості кожному шматочку.",
+    "price": 160,
+    "weight": "90 г",
+    "image": "special6.png",
+    "category": "special",
+    "available": true
+  },
+  {
+    "id": 1778138002019,
+    "name": "тест",
+    "description": "тест",
+    "price": 119,
+    "weight": "90",
+    "image": "black1.png",
+    "category": "black",
+    "available": true
+  }
+]
