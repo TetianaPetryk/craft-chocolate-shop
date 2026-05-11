@@ -1409,31 +1409,5 @@ main {
 #pay-btn:hover {
   background: #4d2d1a;
 }
-/* ===== БАНЕР ===== */
 
-.banner {
-  width: 100%;
-  background: #f8f4ee;
-}
 
-.banner-img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ===== МОБІЛЬНА ВЕРСІЯ ===== */
-
-@media (max-width: 768px) {
-
-  .banner {
-    width: 100%;
-  }
-
-  .banner-img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-}
